@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\server\\src\\index.js",
+      "program": "${workspaceFolder}\\ai\\ai.js",
       "envFile": "${workspaceFolder}\\server\\.env"
     }
   ]

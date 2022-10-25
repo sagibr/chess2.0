@@ -131,7 +131,7 @@ const getOffset = (kind, color, y) => {
   return offsets
 }
 
-const getPlayerPieces = (board, color) => {
+export const getPlayerPieces = (board, color) => {
   const piecesPosition = []
   for (let y = 0; y < board.length; y++) {
     for (let x = 0; x < board[y].length; x++) {
@@ -171,7 +171,7 @@ const isKingUnderThreat = (board, color) => {
   for (const piece of enemyPieces) {
     const moves = getAvailableMoves(board, piece.position)
     for (const move of moves) {
-      if (move.y === KingPosition.y && move.x === KingPosition.x) {
+      if (move.y === KingPosition?.y && move.x === KingPosition?.x) {
         return true
       }
     }

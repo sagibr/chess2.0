@@ -1,5 +1,4 @@
 import axios from "axios"
-import { useState } from "react"
 import {
   GiChessBishop,
   GiChessKnight,
@@ -7,10 +6,16 @@ import {
   GiChessRook,
 } from "react-icons/gi"
 
-const PromotionChoiceBlock = ({ color, setShowPromotionChoice, setGame }) => {
+const PromotionChoiceBlock = ({
+  color,
+  setShowPromotionChoice,
+  setGame,
+  gameId,
+}) => {
   const promotePawn = async (promotionKind) => {
+    const gameId = window.sessionStorage.getItem("gameId")
     const res = await axios.patch(
-      "http://localhost:3001/game/promote/6354dfe8dc2e2e07284aaa58",
+      `http://localhost:3001/game/promote/${gameId}`,
       {
         promotion: promotionKind,
       }

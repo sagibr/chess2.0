@@ -8,12 +8,48 @@ import {
   GiChessRook,
 } from "react-icons/gi"
 const dir = {
-  Pawn: <GiChessPawn className="text-6xl" />,
-  Rook: <GiChessRook className="text-6xl" />,
-  Bishop: <GiChessBishop className="text-6xl" />,
-  Knight: <GiChessKnight className="text-6xl" />,
-  King: <GiChessKing className="text-6xl" />,
-  Queen: <GiChessQueen className="text-6xl" />,
+  Pawn: (
+    <GiChessPawn
+      className={`text-6xl  ${
+        window.sessionStorage.getItem("role") === "White" ? "" : "rotate-180"
+      }`}
+    />
+  ),
+  Rook: (
+    <GiChessRook
+      className={`text-6xl ${
+        window.sessionStorage.getItem("role") === "White" ? "" : "rotate-180"
+      }`}
+    />
+  ),
+  Bishop: (
+    <GiChessBishop
+      className={`text-6xl ${
+        window.sessionStorage.getItem("role") === "White" ? "" : "rotate-180"
+      }`}
+    />
+  ),
+  Knight: (
+    <GiChessKnight
+      className={`text-6xl ${
+        window.sessionStorage.getItem("role") === "White" ? "" : "rotate-180"
+      }`}
+    />
+  ),
+  King: (
+    <GiChessKing
+      className={`text-6xl ${
+        window.sessionStorage.getItem("role") === "White" ? "" : "rotate-180"
+      }`}
+    />
+  ),
+  Queen: (
+    <GiChessQueen
+      className={`text-6xl ${
+        window.sessionStorage.getItem("role") === "White" ? "" : "rotate-180"
+      }`}
+    />
+  ),
 }
 
 const Block = (props) => {
@@ -36,8 +72,8 @@ const Block = (props) => {
         onClick={props.playTurn}
         className={
           props.color === "Black"
-            ? "w-16 h-full m-0 bg-green-800 border text-black"
-            : "w-16 h-full m-0 bg-green-800 border text-white"
+            ? `w-16 h-full m-0 bg-green-800 border text-black`
+            : `w-16 h-full m-0 bg-green-800 border text-white`
         }
       >
         {dir[props.kind]}
@@ -50,8 +86,8 @@ const Block = (props) => {
           onClick={props.getAvailableMoves}
           className={
             props.color === "Black"
-              ? "w-16 h-full m-0 bg-gray-500 text-black"
-              : "w-16 h-full m-0 bg-gray-500 text-white"
+              ? `w-16 h-full m-0 bg-gray-500 text-black`
+              : `w-16 h-full m-0 bg-gray-500 text-white `
           }
         >
           {dir[props.kind]}
@@ -63,8 +99,8 @@ const Block = (props) => {
           onClick={props.getAvailableMoves}
           className={
             props.color === "Black"
-              ? "w-16 h-full m-0  bg-amber-900 text-black"
-              : "w-16 h-full m-0  bg-amber-900 text-white "
+              ? `w-16 h-full m-0  bg-amber-900 text-black `
+              : `w-16 h-full m-0  bg-amber-900 text-white`
           }
         >
           {dir[props.kind]}
