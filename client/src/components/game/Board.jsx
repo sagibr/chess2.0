@@ -15,7 +15,6 @@ const Board = () => {
   const socket = io.connect("http://localhost:3001")
 
   socket.on("respone", () => {
-    console.log("bbbb")
     getGame()
   })
 

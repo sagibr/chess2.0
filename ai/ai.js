@@ -8,8 +8,7 @@ const ai = async (game, socket) => {
 
   socket.on("respone", async () => {
     const game = await getGame(gameId)
-    const whitePieces = getPlayerPieces(game.board, "White")
-    const blackPieces = getPlayerPieces(game.board, "Black")
+
     let path
 
     path = evaluateDeapth(3, game, "Black")
@@ -104,6 +103,7 @@ const movePiece = (board, position, newPosition) => {
   board[position.y][position.x].color = null
   board[position.y][position.x].kind = null
 }
+
 const unmovePiece = (board, position, oldPosition, oldPiece) => {
   board[oldPosition.y][oldPosition.x].kind = board[position.y][position.x].kind
 
