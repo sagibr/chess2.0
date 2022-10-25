@@ -1,6 +1,6 @@
-import { getPlayerPieces } from "./chessUtils.js"
+import { getKingPosition, getPlayerPieces } from "./chessUtils.js"
 import { getGame } from "./DBController.js"
-import { getPieceEval } from "./pieceEvaluation.js"
+import { getPieceEndGameEval, getPieceEval } from "./pieceEvaluation.js"
 
 export const boardEvaluation = (board) => {
   const whitePieces = getPlayerPieces(board, "White")
@@ -13,7 +13,12 @@ export const boardEvaluation = (board) => {
     whiteValue = whiteValue + getPieceEval(piece)
   }
   for (const piece of blackPieces) {
-    blackValue = blackValue + getPieceEval(piece)
+    if (whitePieces.length > 7) {
+      blackValue = blackValue + getPieceEval(piece)
+    } else {
+      const kingPosition = getKingPosition(board, "White")
+      blackValue = blackValue + getPieceEndGameEval(piece, kingPosition)
+    }
   }
   const boardValue = whiteValue - blackValue
 

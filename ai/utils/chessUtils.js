@@ -151,7 +151,7 @@ export const getPlayerPieces = (board, color) => {
   return piecesPosition
 }
 
-const getKingPosition = (board, color) => {
+export const getKingPosition = (board, color) => {
   for (let y = 0; y < board.length; y++) {
     for (let x = 0; x < board[y].length; x++) {
       if (board[y][x].kind === "King" && board[y][x].color === color) {

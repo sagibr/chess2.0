@@ -17,3 +17,16 @@ export const getPieceEval = (piece) => {
 
   return pieceValue
 }
+export const getPieceEndGameEval = (piece, kingPosition) => {
+  const { kind, position } = piece
+
+  const kingPieceDistance = Math.abs(
+    position.y - kingPosition.y + (position.x - kingPosition.x)
+  )
+  const basicValue = dir.basicValue[kind]
+  const pieceMulti = -10 * kingPieceDistance
+
+  const pieceValue = basicValue + pieceMulti
+
+  return pieceValue
+}

@@ -11,95 +11,12 @@ const ai = async (game, socket) => {
     const whitePieces = getPlayerPieces(game.board, "White")
     const blackPieces = getPlayerPieces(game.board, "Black")
     let path
-    // if (whitePieces.length + blackPieces.length < 20) {
-    //   path = evaluateDeapth(4, game, "Black")
-    // } else {
+
     path = evaluateDeapth(3, game, "Black")
-    // }
     console.log(path.value)
-    // await playAi(game)
     await playTurn(path.position, path.newPosition, gameId)
     socket.emit("played", "1")
   })
-}
-
-const playAi = async (game) => {
-  const { board } = game
-  const gameId = game._id
-
-  const blackPieces = getPlayerPieces(board, "Black")
-  const whitePieces = getPlayerPieces(board, "White")
-
-  const paths = []
-
-  for (const blackPiece of blackPieces) {
-    const blackValidMoves = getValidMoves(game, blackPiece.position)
-    for (const move of blackValidMoves) {
-      const saveColor = board[move.y][move.x].color
-      const saveKind = board[move.y][move.x].kind
-
-      board[blackPiece.position.y][blackPiece.position.x].kind = null
-      board[blackPiece.position.y][blackPiece.position.x].color = null
-      board[move.y][move.x].kind = blackPiece.kind
-      board[move.y][move.x].color = blackPiece.color
-
-      let demoBoardValue = boardEvaluation(board)
-
-      let secondStepValue = 0
-      //loop over white pieces
-      for (const whitePiece of whitePieces) {
-        //get piece valid moves
-        const whiteValidMoves = getValidMoves(game, whitePiece.position)
-        for (const move of whiteValidMoves) {
-          const saveColor = board[move.y][move.x].color
-          const saveKind = board[move.y][move.x].kind
-          //move piece in board
-          board[whitePiece.position.y][whitePiece.position.x].kind = null
-          board[whitePiece.position.y][whitePiece.position.x].color = null
-          board[move.y][move.x].kind = whitePiece.kind
-          board[move.y][move.x].color = whitePiece.color
-          //evaluate board after movement
-          let secondStepBoardValue = boardEvaluation(board)
-          //if value is bigger then last value save it
-          if (secondStepBoardValue > secondStepValue) {
-            secondStepValue = secondStepBoardValue
-          }
-          //reset board
-          board[whitePiece.position.y][whitePiece.position.x].kind =
-            whitePiece.kind
-          board[whitePiece.position.y][whitePiece.position.x].color =
-            whitePiece.color
-          board[move.y][move.x].kind = saveKind
-          board[move.y][move.x].color = saveColor
-        }
-      }
-
-      //demoBoardValue = demoBoardValue + secondStepValue
-      demoBoardValue = demoBoardValue + secondStepValue
-
-      paths.push({
-        value: demoBoardValue,
-        position: { y: blackPiece.position.y, x: blackPiece.position.x },
-        newPosition: { y: move.y, x: move.x },
-      })
-
-      board[blackPiece.position.y][blackPiece.position.x].kind = blackPiece.kind
-      board[blackPiece.position.y][blackPiece.position.x].color =
-        blackPiece.color
-      board[move.y][move.x].kind = saveKind
-      board[move.y][move.x].color = saveColor
-
-      demoBoardValue = 0
-    }
-  }
-  let chosenPath = paths[0]
-  for (const path of paths) {
-    if (path.value < chosenPath.value) {
-      chosenPath = path
-    }
-  }
-
-  await playTurn(chosenPath.position, chosenPath.newPosition, gameId)
 }
 
 const evaluateDeapth = (deapth, game, turn) => {
@@ -114,11 +31,14 @@ const evaluateDeapth = (deapth, game, turn) => {
   const blackPieces = getPlayerPieces(board, "Black")
   const whitePieces = getPlayerPieces(board, "White")
   if (deapth === 0) {
-    const lastStepPath = {
+    let lastStepPath
+
+    lastStepPath = {
       value: boardEvaluation(board),
       position: { y: null, x: null },
       newPosition: { y: null, x: null },
     }
+    // }
     return lastStepPath
   }
   if (turn === "Black") {
@@ -144,6 +64,7 @@ const evaluateDeapth = (deapth, game, turn) => {
         unmovePiece(board, blackMove, blackPiece.position, oldPiece)
       }
     }
+    path.value = bestEvalueation
   } else {
     let bestEvalueation = -100000
 
@@ -168,6 +89,7 @@ const evaluateDeapth = (deapth, game, turn) => {
         unmovePiece(board, whiteMove, whitePiece.position, oldPiece)
       }
     }
+    path.value = bestEvalueation
   }
 
   return path
