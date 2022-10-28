@@ -5,7 +5,7 @@ import { startGame } from "./app.js"
 
 const app = express()
 
-const PORT = 3002
+const PORT = process.env.PORT || 3002
 
 app.use(cors())
 
@@ -28,5 +28,5 @@ app.get("/:roomId/:prevRoomId/:diffeculty", (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`service is up on port ${PORT}`)
+  console.log(`service is up on https://chess2-0-ai.herokuapp.com`)
 })
