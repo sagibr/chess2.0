@@ -1,14 +1,14 @@
-import { dir } from "./assets/dir.js"
+import { dic } from "./assets/piecePositionValue.js"
 
 export const getPieceEval = (piece) => {
   const { kind, color, position } = piece
 
-  const basicValue = dir.basicValue[kind]
+  const basicValue = dic.basicValue[kind]
   const pieceMulti =
     color === "White"
-      ? dir[`${kind}PositionMulti`]
+      ? dic[`${kind}PositionMulti`]
       : //reverse the array if black
-        dir[`${kind}PositionMulti`]
+        dic[`${kind}PositionMulti`]
           .slice()
           .map((row) => row.slice().reverse())
           .reverse()
@@ -24,7 +24,7 @@ export const getPieceEndGameEval = (piece, kingPosition) => {
     const kingPieceDistance = Math.abs(
       position.y - kingPosition.y + (position.x - kingPosition.x)
     )
-    const basicValue = dir.basicValue[kind]
+    const basicValue = dic.basicValue[kind]
     const pieceMulti = -10 * kingPieceDistance
 
     const pieceValue = basicValue + pieceMulti

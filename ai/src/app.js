@@ -1,6 +1,6 @@
+import { getGame, playTurn, promotePawn } from "./controllers/gameController.js"
 import { boardEvaluation } from "./utils/boardEvaluation.js"
 import { getPlayerPieces, getValidMoves } from "./utils/chessUtils.js"
-import { getGame, playTurn, promotePawn } from "./utils/gameController.js"
 
 const ai = async (game, socket, diffeculty) => {
   const gameId = game._id

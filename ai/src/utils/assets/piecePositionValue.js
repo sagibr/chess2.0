@@ -1,4 +1,4 @@
-export const dir = {
+export const dic = {
   basicValue: {
     Pawn: 100,
     Knight: 320,
