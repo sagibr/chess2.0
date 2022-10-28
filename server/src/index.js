@@ -60,6 +60,8 @@ io.on("connection", async (socket) => {
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB")
   server.listen(PORT, async () => {
-    console.log(`server is up and running at https://chess2-0-ai.herokuapp.com`)
+    console.log(
+      `server is up and running at https:/chess2-0-server.herokuapp.com`
+    )
   })
 })

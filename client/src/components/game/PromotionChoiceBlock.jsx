@@ -12,7 +12,7 @@ const PromotionChoiceBlock = (props) => {
   const promotePawn = async (promotionKind) => {
     const gameId = window.sessionStorage.getItem("gameId")
     const res = await axios.patch(
-      `https://chess2-0-server.herokuapp.com//game/promote/${gameId}`,
+      `https://chess2-0-server.herokuapp.com/game/promote/${gameId}`,
       {
         promotion: promotionKind,
       }

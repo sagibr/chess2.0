@@ -28,5 +28,5 @@ app.get("/:roomId/:prevRoomId/:diffeculty", (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`service is up on https://chess2-0-ai.herokuapp.com`)
+  console.log(`service is up on https:/chess2-0-ai.herokuapp.com`)
 })

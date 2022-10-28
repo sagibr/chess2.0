@@ -22,7 +22,7 @@ export const getGame = async () => {
 
 export const enableAi = async (roomId, prevRoomId, diffeculty) => {
   const res = await axios.get(
-    `https://chess2-0-ai.herokuapp.com//${roomId}/${prevRoomId}/${diffeculty}`
+    `https://chess2-0-ai.herokuapp.com/${roomId}/${prevRoomId}/${diffeculty}`
   )
   return res
 }
