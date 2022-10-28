@@ -15,7 +15,7 @@ export const playTurn = async (position, newPosition) => {
 export const getGame = async () => {
   const gameId = window.sessionStorage.getItem("gameId")
   const res = await axios.get(
-    `https://chess2-0-server.herokuapp.com//game/${gameId}`
+    `https://chess2-0-server.herokuapp.com/game/${gameId}`
   )
   return res
 }
