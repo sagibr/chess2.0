@@ -8,7 +8,10 @@ import { PORT } from "./utils/config.js"
 //start socket
 const server = http.createServer(app)
 const io = new Server(server, {
-  cors: { origin: "http://localhost:3000", methods: ["GET", "POST", "PATCH"] },
+  cors: {
+    origin: "https://chess2-0-client.netlify.app",
+    methods: ["GET", "POST", "PATCH"],
+  },
 })
 
 //connect to DB
