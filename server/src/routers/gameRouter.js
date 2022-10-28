@@ -31,10 +31,12 @@ router.patch("/play/:id", async (req, res) => {
   const { id } = req.params
   const { position, newPosition } = req.body
   const game = await getGame(id)
-
-  const updatedGame = await playTurn(game, position, newPosition)
-
-  res.send(updatedGame)
+  if (position.y === null && position.x === null) {
+    res.send(game)
+  } else {
+    const updatedGame = await playTurn(game, position, newPosition)
+    res.send(updatedGame)
+  }
 })
 router.patch("/promote/:id", async (req, res) => {
   const { id } = req.params

@@ -1,20 +1,34 @@
-import { io } from "socket.io-client"
 import { boardEvaluation } from "./utils/boardEvaluation.js"
 import { getPlayerPieces, getValidMoves } from "./utils/chessUtils.js"
-import { getGame, playTurn } from "./utils/DBController.js"
+import { getGame, playTurn, promotePawn } from "./utils/gameController.js"
 
-const ai = async (game, socket) => {
+const ai = async (game, socket, diffeculty) => {
   const gameId = game._id
 
-  socket.on("respone", async () => {
-    const game = await getGame(gameId)
-
-    let path
-
-    path = evaluateDeapth(3, game, "Black")
-    console.log(path.value)
-    await playTurn(path.position, path.newPosition, gameId)
-    socket.emit("played", "1")
+  socket.on("respone", async (args) => {
+    if (args.turn === "Black") {
+      console.log(gameId)
+      game = await getGame(gameId)
+      let path
+      console.log(diffeculty)
+      console.time("ai")
+      path = evaluateDeapth(diffeculty, game, "Black")
+      console.timeEnd("ai")
+      console.log(path.value)
+      await playTurn(path.position, path.newPosition, gameId)
+      if (
+        path.newPosition.y === 7 &&
+        game.board[path.position.y][path.position.x].kind === "Pawn"
+      ) {
+        await promotePawn("Queen", gameId)
+      }
+      socket.emit("played", {
+        roomId: args.roomId,
+        position: path.position,
+        newPosition: path.newPosition,
+        turn: args.turn === "White" ? "Black" : "White",
+      })
+    }
   })
 }
 
@@ -37,7 +51,6 @@ const evaluateDeapth = (deapth, game, turn) => {
       position: { y: null, x: null },
       newPosition: { y: null, x: null },
     }
-    // }
     return lastStepPath
   }
   if (turn === "Black") {
@@ -114,11 +127,12 @@ const unmovePiece = (board, position, oldPosition, oldPiece) => {
   board[position.y][position.x].kind = oldPiece.kind
 }
 
-const startGame = async (socket) => {
-  socket.emit("join", "1", (role, game) => {
-    ai(game, socket)
+export const startGame = async (socket, roomId, prevRoomId, diffeculty) => {
+  console.log(`leaving room ${prevRoomId}`)
+  socket.emit("leave", prevRoomId)
+
+  console.log(`joining room ${roomId}`)
+  socket.emit("join", roomId, (role, game) => {
+    ai(game, socket, diffeculty)
   })
 }
-const socket = io.connect("http://localhost:3001")
-
-startGame(socket)

@@ -33,3 +33,11 @@ export const updateGame = async (newGame) => {
     return undefined
   }
 }
+
+// export const deleteAllGames = async () => {
+//   try {
+//     await Game.deleteMany()
+//   } catch (err) {
+//     return undefined
+//   }
+// }

@@ -1,5 +1,4 @@
 import { getKingPosition, getPlayerPieces } from "./chessUtils.js"
-import { getGame } from "./DBController.js"
 import { getPieceEndGameEval, getPieceEval } from "./pieceEvaluation.js"
 
 export const boardEvaluation = (board) => {

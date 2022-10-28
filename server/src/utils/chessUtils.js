@@ -11,7 +11,6 @@ import {
 export const getValidMoves = (game, position) => {
   const { board } = game
   const { y, x } = position
-
   const color = board[y][x].color
   const kind = board[y][x].kind
   const moves = getAvailableMoves(board, position)

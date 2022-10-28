@@ -11,3 +11,9 @@ export const playTurn = async (position, newPosition, id) => {
   })
   return res.data
 }
+export const promotePawn = async (promotion, id) => {
+  const res = await axios.patch(`http://localhost:3001/game/promote/${id}`, {
+    promotion: promotion,
+  })
+  return res.data
+}

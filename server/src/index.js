@@ -16,25 +16,37 @@ connectDB()
 
 //socket events
 let role = "White"
-let playerCount = 0
-let game
+let playerCount = {}
+let game = {}
 
-io.on("connection", (socket) => {
-  console.log("a user connected")
+io.on("connection", async (socket) => {
+  console.log(`a user connected user  Id ${socket.id}`)
   socket.on("join", async (roomId, callback) => {
     socket.join(roomId)
     console.log(`user ${socket.id} joined room ${roomId}`)
-    if (playerCount % 2 === 0) {
-      game = await initGame()
+
+    if (!playerCount[roomId]) {
+      playerCount[roomId] = 0
+      const newGame = await initGame()
+      game[roomId] = newGame
+      role = "White"
+    } else if (playerCount[roomId] % 2 === 0) {
+      role = "White"
+      const newGame = await initGame()
+      game[roomId] = newGame
+    } else {
+      role = "Black"
     }
-    callback(role, game)
-    role = role === "White" ? "Black" : "White"
-    playerCount++
+    callback(role, game[roomId])
+    playerCount[roomId]++
+  })
+  socket.on("leave", (roomId) => {
+    socket.leave(roomId)
+    console.log(`user ${socket.id} leaved room ${roomId}`)
   })
 
-  socket.on("played", (roomId) => {
-    console.log("aaaa")
-    socket.to(roomId).emit("respone")
+  socket.on("played", (args) => {
+    io.to(args.roomId).emit("respone", args)
   })
 
   socket.on("disconnect", () => {
