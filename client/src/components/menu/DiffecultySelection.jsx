@@ -13,7 +13,7 @@ const DiffecultySelection = ({
           className="bg-blue-400 w-1/6 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mb-4"
           onClick={async () => {
             const prevRoomId = window.sessionStorage.getItem("roomId")
-            const game = await startGame()
+            await startGame()
             const roomId = socket.id
             setShowMenu(false)
             setShowDiffecultySelection(false)
@@ -26,7 +26,7 @@ const DiffecultySelection = ({
           className="bg-blue-600 w-1/6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
           onClick={async () => {
             const prevRoomId = window.sessionStorage.getItem("roomId")
-            const game = await startGame()
+            await startGame()
             const roomId = socket.id
             setShowMenu(false)
             setShowDiffecultySelection(false)
@@ -39,7 +39,7 @@ const DiffecultySelection = ({
           className="bg-blue-800 w-1/6 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mb-4"
           onClick={async () => {
             const prevRoomId = window.sessionStorage.getItem("roomId")
-            const game = await startGame()
+            await startGame()
             const roomId = socket.id
             setShowMenu(false)
             setShowDiffecultySelection(false)

@@ -6,7 +6,7 @@ import Menu from "../menu/Menu"
 import Board from "./Board"
 import PromotionChoiceBlock from "./PromotionChoiceBlock"
 
-const socket = io.connect("http://localhost:3001")
+const socket = io.connect("https://chess2-0-server.herokuapp.com")
 const Game = () => {
   const [game, setGame] = useState()
   const [moves, setMoves] = useState()
@@ -25,6 +25,7 @@ const Game = () => {
       setLastMove({ position: args.newPosition, oldPosition: args.position })
       setGame(res.data)
     })
+    // eslint-disable-next-line
   }, [socket])
 
   useEffect(() => {
@@ -47,6 +48,7 @@ const Game = () => {
     if (game?.result) {
       setShowMenu(true)
     }
+    // eslint-disable-next-line
   }, [game])
 
   const play = async (newPosition) => {
@@ -107,7 +109,6 @@ const Game = () => {
           <PromotionChoiceBlock
             roomId={roomId}
             socket={socket}
-            color={game?.turn}
             showPromotionChoice={showPromotionChoice}
             setShowPromotionChoice={setShowPromotionChoice}
             setGame={setGame}

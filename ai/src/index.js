@@ -9,7 +9,8 @@ const PORT = 3002
 
 app.use(cors())
 
-const socket = io.connect("http://localhost:3001")
+const socket = io.connect("https://chess2-0-server.herokuapp.com")
+
 app.get("/:roomId/:prevRoomId/:diffeculty", (req, res) => {
   try {
     const prevRoomId = req.params.prevRoomId

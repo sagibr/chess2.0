@@ -38,6 +38,7 @@ const Menu = ({
       setShowJoinRoom(false)
       setShowMenu(true)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result])
   return showMenu ? (
     showJoinRoom ? (

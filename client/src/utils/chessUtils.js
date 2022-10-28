@@ -113,6 +113,8 @@ const getOffset = (kind, color, y) => {
         ? (offsets = blackPawnOffset)
         : (offsets = whitePawnOffset)
       break
+    default:
+      offsets = [[]]
   }
 
   //add another step to pawn if its his first step

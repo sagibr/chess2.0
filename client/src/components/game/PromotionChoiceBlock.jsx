@@ -7,12 +7,12 @@ import {
 } from "react-icons/gi"
 
 const PromotionChoiceBlock = (props) => {
-  const { color, setShowPromotionChoice, setGame } = props
+  const { setShowPromotionChoice, setGame } = props
   const role = window.sessionStorage.getItem("role")
   const promotePawn = async (promotionKind) => {
     const gameId = window.sessionStorage.getItem("gameId")
     const res = await axios.patch(
-      `http://localhost:3001/game/promote/${gameId}`,
+      `https://chess2-0-server.herokuapp.com//game/promote/${gameId}`,
       {
         promotion: promotionKind,
       }
