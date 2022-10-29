@@ -93,7 +93,7 @@ const Game = () => {
         setLastMove={setLastMove}
       />
       <div
-        className={` w-full lg:h-full lg:pt-10 md:pt-20 pt-48 ${
+        className={` w-full lg:h-full lg:pt-10 md:pt-20 sm:pt-32 pt-48 ${
           window.sessionStorage.getItem("role") === "White"
             ? ""
             : "rotate-180 pt-0 pb-6"
