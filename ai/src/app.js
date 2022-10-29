@@ -2,13 +2,12 @@ import { getGame, playTurn, promotePawn } from "./controllers/gameController.js"
 import { boardEvaluation } from "./utils/boardEvaluation.js"
 import { getPlayerPieces, getValidMoves } from "./utils/chessUtils.js"
 
-const ai = async (game, socket, diffeculty) => {
-  const gameId = game._id
-
+const ai = async (socket, diffeculty) => {
   socket.on("respone", async (args) => {
     if (args.turn === "Black") {
+      const gameId = args.gameId
       console.log(gameId)
-      game = await getGame(gameId)
+      const game = await getGame(gameId)
       let path
       console.log(diffeculty)
       console.time("ai")
@@ -132,7 +131,7 @@ export const startGame = async (socket, roomId, prevRoomId, diffeculty) => {
   socket.emit("leave", prevRoomId)
 
   console.log(`joining room ${roomId}`)
-  socket.emit("join", roomId, (role, game) => {
-    ai(game, socket, diffeculty)
+  socket.emit("join", roomId, () => {
+    ai(socket, diffeculty)
   })
 }
