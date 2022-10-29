@@ -4,12 +4,12 @@ import { Server } from "socket.io"
 import app from "./app.js"
 import { initGame } from "./controllers/gameController.js"
 import { connectDB } from "./db/DBController.js"
-import { PORT } from "./utils/config.js"
+import { AI_URL, CLIENT_URL, PORT } from "./utils/config.js"
 //start socket
 const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: "https://chess2-0-client.netlify.app",
+    origin: [CLIENT_URL, AI_URL],
     methods: ["GET", "POST", "PATCH"],
   },
 })

@@ -2,6 +2,7 @@ import cors from "cors"
 import express from "express"
 import { io } from "socket.io-client"
 import { startGame } from "./app.js"
+import { SERVER_URL } from "./utils/config.js"
 
 const app = express()
 
@@ -9,7 +10,7 @@ const PORT = process.env.PORT || 3002
 
 app.use(cors())
 
-const socket = io.connect("https://chess2-0-server.herokuapp.com")
+const socket = io.connect(SERVER_URL)
 
 app.get("/:roomId/:prevRoomId/:diffeculty", (req, res) => {
   try {

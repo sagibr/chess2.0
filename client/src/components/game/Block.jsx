@@ -34,12 +34,12 @@ const Block = (props) => {
         onClick={props.playTurn}
         className={
           props.color === "Black"
-            ? `w-16 h-full m-0 bg-green-300 border border-black text-black ${
+            ? `lg:w-16 md:w-14 w-12 h-full m-0 bg-green-300 border border-black text-black ${
                 window.sessionStorage.getItem("role") === "White"
                   ? ""
                   : "rotate-180"
               }`
-            : `w-16 h-full m-0 bg-green-300 border border-black text-white ${
+            : `lg:w-16 md:w-14 w-12 h-full m-0 bg-green-300 border border-black text-white ${
                 window.sessionStorage.getItem("role") === "White"
                   ? ""
                   : "rotate-180"
@@ -55,13 +55,13 @@ const Block = (props) => {
         onClick={props.getAvailableMoves}
         className={
           props.color === "Black"
-            ? `w-16 h-full m-0 bg-yellow-700 border border-white text-black
+            ? `lg:w-16 md:w-14 w-12 h-full m-0 bg-yellow-700 border border-white text-black
           ${
             window.sessionStorage.getItem("role") === "White"
               ? ""
               : "rotate-180"
           } `
-            : `w-16 h-full m-0 bg-yellow-700 border border-white text-white ${
+            : `lg:w-16 md:w-14 w-12 h-full m-0 bg-yellow-700 border border-white text-white ${
                 window.sessionStorage.getItem("role") === "White"
                   ? ""
                   : "rotate-180"
@@ -78,13 +78,13 @@ const Block = (props) => {
           onClick={props.getAvailableMoves}
           className={
             props.color === "Black"
-              ? `w-16 h-full m-0 bg-gray-500 text-black
+              ? `lg:w-16 md:w-14 w-12 h-full m-0 bg-gray-500 text-black
               ${
                 window.sessionStorage.getItem("role") === "White"
                   ? ""
                   : "rotate-180"
               } `
-              : `w-16 h-full m-0 bg-gray-500 text-white ${
+              : `lg:w-16 md:w-14 w-12 h-full m-0 bg-gray-500 text-white ${
                   window.sessionStorage.getItem("role") === "White"
                     ? ""
                     : "rotate-180"
@@ -100,12 +100,12 @@ const Block = (props) => {
           onClick={props.getAvailableMoves}
           className={
             props.color === "Black"
-              ? `w-16 h-full m-0  bg-green-900 text-black ${
+              ? `lg:w-16 md:w-14 w-12 h-full m-0  bg-green-900 text-black ${
                   window.sessionStorage.getItem("role") === "White"
                     ? ""
                     : "rotate-180"
                 }`
-              : `w-16 h-full m-0  bg-green-900 text-white ${
+              : `lg:w-16 md:w-14 w-12 h-full m-0  bg-green-900 text-white ${
                   window.sessionStorage.getItem("role") === "White"
                     ? ""
                     : "rotate-180"

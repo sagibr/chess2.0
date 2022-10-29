@@ -5,7 +5,10 @@ const Board = ({ game, getAvailableMoves, playTurn, moves, lastMove }) => {
     <>
       {game?.board?.map((row, Yindex) => {
         return (
-          <div key={Yindex} className="h-16 w-fit m-auto flex bg-green-900">
+          <div
+            key={Yindex}
+            className="lg:h-16 md:h-14 h-12 w-fit m-auto flex bg-green-900"
+          >
             {row.map((block, Xindex) => {
               return (
                 <Block

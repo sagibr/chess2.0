@@ -6,7 +6,7 @@ import Menu from "../menu/Menu"
 import Board from "./Board"
 import PromotionChoiceBlock from "./PromotionChoiceBlock"
 
-const socket = io.connect("https://chess2-0-server.herokuapp.com")
+const socket = io.connect(process.env.REACT_APP_SERVER_URL)
 const Game = () => {
   const [game, setGame] = useState()
   const [moves, setMoves] = useState()
@@ -92,7 +92,7 @@ const Game = () => {
         setLastMove={setLastMove}
       />
       <div
-        className={` w-full h-full pt-6 ${
+        className={` w-full lg:h-full lg:pt-14  pt-48 ${
           window.sessionStorage.getItem("role") === "White"
             ? ""
             : "rotate-180 pt-0 pb-6"
