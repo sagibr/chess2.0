@@ -20,6 +20,7 @@ const PromotionChoiceBlock = (props) => {
     setGame(res.data)
     props.socket.emit("played", {
       roomId: props.roomId,
+      gameId: gameId,
     })
   }
   return (
