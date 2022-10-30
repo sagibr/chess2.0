@@ -99,7 +99,7 @@ const Game = () => {
         className={` w-full lg:h-full lg:pt-10 md:pt-20 sm:pt-32 pt-48 ${
           window.sessionStorage.getItem("role") === "White"
             ? ""
-            : "rotate-180 pt-0 pb-6"
+            : "rotate-180 lg:pt-0 md:pt-0 sm:pt-0 pt-0 lg:pb-10 md:pb-20 sm:pb-32 pb-48"
         }`}
       >
         <Board
