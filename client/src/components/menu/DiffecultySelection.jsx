@@ -15,7 +15,7 @@ const DiffecultySelection = ({
     setShowDiffecultySelection(false)
     const res = await enableAi(roomId, prevRoomId, diff)
     if (res === "error") {
-      await startGameByDiff(diff)
+      await enableAi(roomId, prevRoomId, diff)
     }
   }
   return (
