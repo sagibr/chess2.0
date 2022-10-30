@@ -5,6 +5,7 @@ const DiffecultySelection = ({
   setShowMenu,
   setShowDiffecultySelection,
   socket,
+  setGame,
 }) => {
   return (
     <div className="h-screen w-screen bg-black bg-opacity-70 absolute z-10">

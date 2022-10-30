@@ -5,16 +5,21 @@ import { getPlayerPieces, getValidMoves } from "./utils/chessUtils.js"
 const ai = async (socket, diffeculty) => {
   socket.on("respone", async (args) => {
     if (args.turn === "Black") {
+      console.time("ai: ")
       const gameId = args.gameId
       console.log(gameId)
+      console.time("game fetching from DB: ")
       const game = await getGame(gameId)
+      console.timeEnd("game fetching from DB: ")
       let path
       console.log(diffeculty)
-      console.time("ai")
+      console.time("evalute: ")
       path = evaluateDeapth(diffeculty, game, "Black")
-      console.timeEnd("ai")
+      console.timeEnd("evalute: ")
       console.log(path.value)
+      console.time("playing turn: ")
       await playTurn(path.position, path.newPosition, gameId)
+      console.timeEnd("playing turn: ")
       if (
         path.newPosition.y === 7 &&
         game.board[path.position.y][path.position.x].kind === "Pawn"
@@ -27,6 +32,7 @@ const ai = async (socket, diffeculty) => {
         newPosition: path.newPosition,
         turn: args.turn === "White" ? "Black" : "White",
       })
+      console.timeEnd("ai: ")
     }
   })
 }
@@ -131,7 +137,7 @@ export const startGame = async (socket, roomId, prevRoomId, diffeculty) => {
   socket.emit("leave", prevRoomId)
 
   console.log(`joining room ${roomId}`)
-  socket.emit("join", roomId, () => {
-    ai(socket, diffeculty)
+  socket.emit("join", roomId, async () => {
+    await ai(socket, diffeculty)
   })
 }

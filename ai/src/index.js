@@ -12,16 +12,14 @@ app.use(cors())
 
 const socket = io.connect(SERVER_URL)
 
-app.get("/:roomId/:prevRoomId/:diffeculty", (req, res) => {
+app.get("/:roomId/:prevRoomId/:diffeculty", async (req, res) => {
   try {
     const prevRoomId = req.params.prevRoomId
     const roomId = req.params.roomId
     const diffeculty = req.params.diffeculty
-    setTimeout(() => {
-      socket.removeAllListeners()
-      startGame(socket, roomId, prevRoomId, diffeculty)
-      res.sendStatus(200)
-    }, 1000)
+    socket.removeAllListeners()
+    await startGame(socket, roomId, prevRoomId, diffeculty)
+    res.sendStatus(200)
   } catch (err) {
     console.log(err)
     res.sendStatus(500)
