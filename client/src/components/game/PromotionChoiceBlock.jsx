@@ -44,7 +44,7 @@ const PromotionChoiceBlock = (props) => {
   return (
     props.showPromotionChoice && (
       <div
-        className={`absolute w-1/3 left-0 right-0 text-center m-auto top-1/3 ${
+        className={`absolute lg:w-1/3 md:w-2/4 sm:w-1/2  left-0 right-0 text-center m-auto top-1/3 md:top-1/4 ${
           role === "White" ? "" : "rotate-180"
         }`}
       >
