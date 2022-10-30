@@ -69,13 +69,23 @@ const Game = () => {
     setGame({ ...newGame, turn: newGame.turn })
     const res = await playTurn(pieceLocation, newPosition)
     setGame(res.data)
-    socket.emit("played", {
-      roomId: roomId,
-      position: pieceLocation,
-      newPosition: newPosition,
-      turn: newGame.turn,
-      gameId: newGame._id,
-    })
+    if (
+      (game.board[newPosition.y][newPosition.x].kind === "Pawn" &&
+        game.board[newPosition.y][newPosition.x].color === "White" &&
+        newPosition.y === 0) ||
+      (game.board[newPosition.y][newPosition.x].kind === "Pawn" &&
+        game.board[newPosition.y][newPosition.x].color === "Black" &&
+        newPosition.y === 7)
+    ) {
+    } else {
+      socket.emit("played", {
+        roomId: roomId,
+        position: pieceLocation,
+        newPosition: newPosition,
+        turn: newGame.turn,
+        gameId: newGame._id,
+      })
+    }
   }
 
   const getAvailableMoves = (position) => {
@@ -116,6 +126,8 @@ const Game = () => {
             showPromotionChoice={showPromotionChoice}
             setShowPromotionChoice={setShowPromotionChoice}
             setGame={setGame}
+            game={game}
+            pieceLocation={pieceLocation}
           />
         }
       </div>

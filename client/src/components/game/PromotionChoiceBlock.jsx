@@ -18,7 +18,25 @@ const PromotionChoiceBlock = (props) => {
       }
     )
     setGame(res.data)
+    let newPosition = { y: null, x: null }
+    for (let i = 0; i < 8; i++) {
+      if (
+        props.game.board[0][i].kind === "Pawn" &&
+        props.game.board[0][i].color === "White"
+      ) {
+        newPosition = { y: 0, x: i }
+      }
+      if (
+        props.game.board[7][i].kind === "Pawn" &&
+        props.game.board[7][i].color === "Black"
+      ) {
+        newPosition = { y: 7, x: i }
+      }
+    }
     props.socket.emit("played", {
+      position: props.pieceLocation,
+      newPosition: newPosition,
+      turn: props.game.turn,
       roomId: props.roomId,
       gameId: gameId,
     })
