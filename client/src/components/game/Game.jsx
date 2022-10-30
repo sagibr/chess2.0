@@ -20,8 +20,11 @@ const Game = () => {
 
   useEffect(() => {
     socket.on("respone", async (args) => {
-      const res = await getGame()
-
+      let res = await getGame()
+      //retry game fetching if game havent changed
+      if (res.data.board[args.position?.y][args.position?.x].kind !== null) {
+        res = await getGame()
+      }
       setLastMove({ position: args.newPosition, oldPosition: args.position })
       setGame(res.data)
     })
