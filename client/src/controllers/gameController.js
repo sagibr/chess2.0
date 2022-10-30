@@ -21,8 +21,13 @@ export const getGame = async () => {
 }
 
 export const enableAi = async (roomId, prevRoomId, diffeculty) => {
-  const res = await axios.get(
-    `${process.env.REACT_APP_AI_URL}/${roomId}/${prevRoomId}/${diffeculty}`
-  )
-  return res
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_AI_URL}/${roomId}/${prevRoomId}/${diffeculty}`
+    )
+
+    return res
+  } catch (err) {
+    return "error"
+  }
 }
