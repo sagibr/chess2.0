@@ -34,7 +34,7 @@ Chess 2.0 was made to learn more about complex applications that have complex da
 
 ## Screenshots
 
-<p align="center"><img src="./Readme-Image.jpg" width="300" /></p>
+<p align="center"><img src="./Readme-Image2.jpg" width="300" /></p>
 
 ## Technologies:
 
