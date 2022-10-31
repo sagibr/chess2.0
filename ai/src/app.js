@@ -133,9 +133,10 @@ const unmovePiece = (board, position, oldPosition, oldPiece) => {
 }
 
 export const startGame = async (socket, roomId, prevRoomId, diffeculty) => {
-  console.log(`leaving room ${prevRoomId}`)
-  socket.emit("leave", prevRoomId)
-
+  if (prevRoomId && prevRoomId !== "null") {
+    console.log(`leaving room ${prevRoomId}`)
+    socket.emit("leave", prevRoomId)
+  }
   console.log(`joining room ${roomId}`)
   socket.emit("join", roomId, async () => {
     await ai(socket, diffeculty)
