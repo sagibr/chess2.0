@@ -292,63 +292,66 @@ const canPlayerCastle = (board, color, canCastle) => {
     left: true,
     right: true,
   }
+  if (isKingUnderThreat(board, color)) {
+    result.left = false
+    result.right = false
+  } else {
+    if (castleParams?.king) {
+      const kingPosition = getKingPosition(board, color)
 
-  if (castleParams?.king) {
-    const kingPosition = getKingPosition(board, color)
-
-    if (castleParams.rightRook) {
-      //check if the blocks between the king and the rook are empty
-      if (
-        board[kingPosition.y][5].kind === null &&
-        board[kingPosition.y][6].kind === null
-      ) {
-        //check if the blocks between the king and the rook are threatend by enemy
-        const enemyPieces = getPlayerPieces(board, enemyColor)
-        for (const piece of enemyPieces) {
-          const moves = getAvailableMoves(board, piece.position)
-          for (const move of moves) {
-            if (move.y === kingPosition.y && (move.x === 5 || move.x === 6)) {
-              result.right = false
+      if (castleParams.rightRook) {
+        //check if the blocks between the king and the rook are empty
+        if (
+          board[kingPosition.y][5].kind === null &&
+          board[kingPosition.y][6].kind === null
+        ) {
+          //check if the blocks between the king and the rook are threatend by enemy
+          const enemyPieces = getPlayerPieces(board, enemyColor)
+          for (const piece of enemyPieces) {
+            const moves = getAvailableMoves(board, piece.position)
+            for (const move of moves) {
+              if (move.y === kingPosition.y && (move.x === 5 || move.x === 6)) {
+                result.right = false
+              }
             }
           }
+        } else {
+          result.right = false
         }
       } else {
         result.right = false
       }
-    } else {
-      result.right = false
-    }
-    if (castleParams.leftRook) {
-      //check if the blocks between the king and the rook are empty
-      if (
-        board[kingPosition.y][1].kind === null &&
-        board[kingPosition.y][2].kind === null &&
-        board[kingPosition.y][3].kind === null
-      ) {
-        //check if the blocks between the king and the rook are threatend by enemy
-        const enemyPieces = getPlayerPieces(board, enemyColor)
-        for (const piece of enemyPieces) {
-          const moves = getAvailableMoves(board, piece.position)
-          for (const move of moves) {
-            if (
-              move.y === kingPosition.y &&
-              (move.x === 1 || move.x === 2 || move.x === 3)
-            ) {
-              result.left = false
+      if (castleParams.leftRook) {
+        //check if the blocks between the king and the rook are empty
+        if (
+          board[kingPosition.y][1].kind === null &&
+          board[kingPosition.y][2].kind === null &&
+          board[kingPosition.y][3].kind === null
+        ) {
+          //check if the blocks between the king and the rook are threatend by enemy
+          const enemyPieces = getPlayerPieces(board, enemyColor)
+          for (const piece of enemyPieces) {
+            const moves = getAvailableMoves(board, piece.position)
+            for (const move of moves) {
+              if (
+                move.y === kingPosition.y &&
+                (move.x === 1 || move.x === 2 || move.x === 3)
+              ) {
+                result.left = false
+              }
             }
           }
+        } else {
+          result.left = false
         }
       } else {
         result.left = false
       }
     } else {
       result.left = false
+      result.right = false
     }
-  } else {
-    result.left = false
-    result.right = false
   }
-
   return result
 }
 
