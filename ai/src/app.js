@@ -70,7 +70,7 @@ const evaluateDeapth = (deapth, game, turn) => {
         }
         movePiece(board, blackPiece.position, blackMove)
         const evaluation = evaluateDeapth(deapth - 1, game, "White").value
-        if (evaluation < bestEvalueation) {
+        if (evaluation <= bestEvalueation) {
           bestEvalueation = evaluation
           path = {
             position: blackPiece.position,
@@ -95,7 +95,7 @@ const evaluateDeapth = (deapth, game, turn) => {
         }
         movePiece(board, whitePiece.position, whiteMove)
         const evaluation = evaluateDeapth(deapth - 1, game, "Black").value
-        if (evaluation > bestEvalueation) {
+        if (evaluation >= bestEvalueation) {
           bestEvalueation = evaluation
           path = {
             position: whitePiece.position,
