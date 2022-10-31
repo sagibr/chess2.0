@@ -10,6 +10,7 @@ const Menu = ({
   setGame,
   socket,
   setLastMove,
+  setLoading,
 }) => {
   const [showJoinRoom, setShowJoinRoom] = useState(false)
   const [showDiffecultySelection, setShowDiffecultySelection] = useState(false)
@@ -55,6 +56,7 @@ const Menu = ({
         setShowMenu={setShowMenu}
         setShowDiffecultySelection={setShowDiffecultySelection}
         socket={socket}
+        setLoading={setLoading}
       />
     ) : (
       <MainMenu

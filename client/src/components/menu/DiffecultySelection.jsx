@@ -5,9 +5,10 @@ const DiffecultySelection = ({
   setShowMenu,
   setShowDiffecultySelection,
   socket,
-  setGame,
+  setLoading,
 }) => {
   const startGameByDiff = async (diff) => {
+    setLoading(true)
     const prevRoomId = window.sessionStorage.getItem("roomId")
     await startGame()
     const roomId = socket.id
@@ -17,6 +18,7 @@ const DiffecultySelection = ({
     if (res === "error") {
       await enableAi(roomId, prevRoomId, diff)
     }
+    setLoading(false)
   }
   return (
     <div className="h-screen w-screen bg-black bg-opacity-70 absolute z-10">

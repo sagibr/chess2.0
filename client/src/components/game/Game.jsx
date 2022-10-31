@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { io } from "socket.io-client"
 import { getGame, playTurn } from "../../controllers/gameController"
 import { getValidMoves } from "../../utils/chessUtils"
+import Loading from "../menu/Loading"
 import Menu from "../menu/Menu"
 import Board from "./Board"
 import PromotionChoiceBlock from "./PromotionChoiceBlock"
@@ -14,6 +15,7 @@ const Game = () => {
   const [showPromotionChoice, setShowPromotionChoice] = useState(false)
   const [showMenu, setShowMenu] = useState(true)
   const [lastMove, setLastMove] = useState({})
+  const [loading, setLoading] = useState(false)
 
   const role = window.sessionStorage.getItem("role")
   const roomId = window.sessionStorage.getItem("roomId")
@@ -94,8 +96,9 @@ const Game = () => {
       setPieceLocation(position)
     }
   }
-
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <Menu
         showMenu={showMenu}
@@ -104,6 +107,8 @@ const Game = () => {
         setGame={setGame}
         socket={socket}
         setLastMove={setLastMove}
+        loading={loading}
+        setLoading={setLoading}
       />
       <div
         className={` w-full lg:h-full lg:pt-10 md:pt-20 sm:pt-32 pt-48 ${
