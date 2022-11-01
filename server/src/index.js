@@ -25,7 +25,7 @@ let game = {}
 io.on("connection", async (socket) => {
   console.log(`a user connected user  Id ${socket.id}`)
   socket.on("join", async (roomId, callback) => {
-    socket.join(roomId)
+    await socket.join(roomId)
     console.log(`user ${socket.id} joined room ${roomId}`)
 
     if (!playerCount[roomId]) {
