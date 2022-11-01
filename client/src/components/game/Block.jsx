@@ -32,43 +32,25 @@ const Block = (props) => {
     return (
       <div
         onClick={props.playTurn}
-        className={
-          props.color === "Black"
-            ? `lg:w-16 md:w-14 w-12 h-full m-0 bg-green-300 border border-black text-black ${
-                window.sessionStorage.getItem("role") === "White"
-                  ? ""
-                  : "rotate-180"
-              }`
-            : `lg:w-16 md:w-14 w-12 h-full m-0 bg-green-300 border border-black text-white ${
-                window.sessionStorage.getItem("role") === "White"
-                  ? ""
-                  : "rotate-180"
-              }`
-        }
+        className={`lg:w-16 md:w-14 w-11 h-full m-0 bg-green-300 border border-black  ${
+          window.sessionStorage.getItem("role") === "White" ? "" : "rotate-180"
+        }`}
       >
-        {piecesIcons[props.kind]}
+        {piecesIcons[props.color + props.kind]}
       </div>
     )
   } else if (isLastMove()) {
     return (
       <div
         onClick={props.getAvailableMoves}
-        className={
-          props.color === "Black"
-            ? `lg:w-16 md:w-14 w-12 h-full m-0 bg-yellow-700 border border-white text-black
+        className={`lg:w-16 md:w-14 w-11 h-full m-0 bg-yellow-700 border border-white 
           ${
             window.sessionStorage.getItem("role") === "White"
               ? ""
               : "rotate-180"
-          } `
-            : `lg:w-16 md:w-14 w-12 h-full m-0 bg-yellow-700 border border-white text-white ${
-                window.sessionStorage.getItem("role") === "White"
-                  ? ""
-                  : "rotate-180"
-              } `
-        }
+          } `}
       >
-        {piecesIcons[props.kind]}
+        {piecesIcons[props.color + props.kind]}
       </div>
     )
   } else {
@@ -76,43 +58,27 @@ const Block = (props) => {
       return (
         <div
           onClick={props.getAvailableMoves}
-          className={
-            props.color === "Black"
-              ? `lg:w-16 md:w-14 w-12 h-full m-0 bg-gray-500 text-black
+          className={`lg:w-16 md:w-14 w-11 h-full m-0 bg-amber-200 
               ${
                 window.sessionStorage.getItem("role") === "White"
                   ? ""
                   : "rotate-180"
-              } `
-              : `lg:w-16 md:w-14 w-12 h-full m-0 bg-gray-500 text-white ${
-                  window.sessionStorage.getItem("role") === "White"
-                    ? ""
-                    : "rotate-180"
-                } `
-          }
+              } `}
         >
-          {piecesIcons[props.kind]}
+          {piecesIcons[props.color + props.kind]}
         </div>
       )
     } else {
       return (
         <div
           onClick={props.getAvailableMoves}
-          className={
-            props.color === "Black"
-              ? `lg:w-16 md:w-14 w-12 h-full m-0  bg-green-900 text-black ${
-                  window.sessionStorage.getItem("role") === "White"
-                    ? ""
-                    : "rotate-180"
-                }`
-              : `lg:w-16 md:w-14 w-12 h-full m-0  bg-green-900 text-white ${
-                  window.sessionStorage.getItem("role") === "White"
-                    ? ""
-                    : "rotate-180"
-                }`
-          }
+          className={`lg:w-16 md:w-14 w-11 h-full m-0  bg-boardGreen  ${
+            window.sessionStorage.getItem("role") === "White"
+              ? ""
+              : "rotate-180"
+          }`}
         >
-          {piecesIcons[props.kind]}
+          {piecesIcons[props.color + props.kind]}
         </div>
       )
     }
