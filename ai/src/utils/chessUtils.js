@@ -163,7 +163,7 @@ export const getKingPosition = (board, color) => {
   }
 }
 
-const isKingUnderThreat = (board, color) => {
+export const isKingUnderThreat = (board, color) => {
   const KingPosition = getKingPosition(board, color)
 
   const enemyPieces = getPlayerPieces(
