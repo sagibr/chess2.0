@@ -58,7 +58,7 @@ const Block = (props) => {
       return (
         <div
           onClick={props.getAvailableMoves}
-          className={`lg:w-16 md:w-14 w-11 h-full m-0 bg-amber-200 
+          className={`lg:w-16 md:w-14 w-11 h-full m-0 bg-amber-100 
               ${
                 window.sessionStorage.getItem("role") === "White"
                   ? ""
