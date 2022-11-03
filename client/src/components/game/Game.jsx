@@ -117,26 +117,12 @@ const Game = () => {
         setLoading={setLoading}
       />
       <div
-        className={` w-full lg:h-full lg:pt-10 md:pt-20 sm:pt-32 pt-32 h-screen bg-background  ${
+        className={` w-full lg:h-full lg:pt-10 md:pt-20 sm:pt-32 pt-48 h-screen bg-background  ${
           window.sessionStorage.getItem("role") === "White"
             ? ""
             : "rotate-180 lg:pt-0 md:pt-0 sm:pt-0 pt-0 lg:pb-10 md:pb-20 sm:pb-32 pb-48"
         }`}
       >
-        {stats.positionSearched && (
-          <>
-            <h1 className="lg:absolute left-7 top-32 text-white font-bold text-4xl">
-              Stats:
-            </h1>
-            <h1 className="lg:absolute left-7 top-48 text-white font-bold text-xl">
-              Positions Searched: {stats.positionSearched}
-            </h1>
-            <h1 className="lg:absolute left-7 top-56 text-white font-bold text-xl mb-10 ">
-              Checkmats Found: {stats.checkmatsFound}
-            </h1>
-          </>
-        )}
-
         <Board
           game={game}
           getAvailableMoves={getAvailableMoves}
@@ -155,6 +141,43 @@ const Game = () => {
             pieceLocation={pieceLocation}
           />
         }
+        {stats.positionSearched && (
+          <>
+            <h1 className="lg:absolute lg:mt-0 left-7 top-32 text-white font-bold text-4xl mt-10">
+              AI Statistics:
+            </h1>
+            <h1 className="lg:absolute left-7 top-48 text-white font-bold text-xl">
+              Positions Searched:
+              <span
+                className={
+                  stats.positionSearched > 5000
+                    ? stats.positionSearched > 10000
+                      ? `text-red-500`
+                      : `text-yellow-500`
+                    : `text-green-500`
+                }
+              >
+                {" "}
+                {stats.positionSearched}
+              </span>
+            </h1>
+            <h1 className="lg:absolute left-7 top-56 text-white font-bold text-xl ">
+              Checkmats Found:{" "}
+              <span
+                className={
+                  stats.checkmatsFound > 0
+                    ? stats.checkmatsFound > 10
+                      ? `text-red-500`
+                      : `text-yellow-500`
+                    : `text-green-500`
+                }
+              >
+                {" "}
+                {stats.checkmatsFound}
+              </span>
+            </h1>
+          </>
+        )}
       </div>
     </>
   )
